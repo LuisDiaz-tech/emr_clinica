@@ -2,10 +2,8 @@
 
 namespace Felipe\EmrClinica\Config;
 
-use PDO;
-use PDOException;
 
-Class Database{
+class Database{
     private $host ="localhost";
     private $db ="emr_clinica";
     private $user = "postgres";
@@ -14,10 +12,12 @@ Class Database{
 
     public function connect(){
     try{
-        $pdo = new PDO("pgqsl:host={$this->host};port={$this->port};dbname={$this->db}",$this->user,$this->pass);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->db}";
+
+        $pdo = new \PDO($dsn, $this->user, $this->pass);
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         return $pdo;    
-        }catch(PDOException $e){
+        }catch(\PDOException $e){
             die("Error conexión: " . $e->getMessage());
         }
     }
