@@ -18,4 +18,8 @@ private patient $patientModel;
     public function index(): array{
         return $this->patientModel->getAll();
     }
+
+    public function store(array $data): bool {
+    return $this->patientModel->create($data);
+}
 }

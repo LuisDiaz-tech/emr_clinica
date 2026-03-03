@@ -1,6 +1,6 @@
 <?php
 
-namespace Felipe\ErmClinica\Models;
+namespace Felipe\EmrClinica\Models;
 
 use PDO;
 
@@ -22,7 +22,9 @@ class Patient{
     }
 
     public function getAll(): array{
-        $stmt = $this->con->query("SELECT * FROM pacientes ORDER BY patient_id DESC");
+        $stmt = $this->conn->query("SELECT * FROM pacientes ORDER BY patient_id DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
 }
