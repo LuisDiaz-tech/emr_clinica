@@ -1,0 +1,17 @@
+{
+    "name": "felipe/emr_clinica",
+    "description": "Mini aplicacion de gestion clinica desarrollada en PHP con arquitectura MVC y PostgreSQL",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Felipe\\EmrClinica\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Luis-TechHome",
+            "email": "i4zjojoa@gmail.com"
+        }
+    ],
+    "require": {}
+}
