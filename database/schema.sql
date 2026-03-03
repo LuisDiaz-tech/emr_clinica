@@ -94,6 +94,34 @@ CREATE TABLE login (
         ON DELETE CASCADE
 )
 
+CREATE INDEX idx_citas_fecha ON citas(scheduled_at);
+CREATE INDEX idx_citas_medico ON citas(doctor_id);
+CREATE INDEX idx_citas_paciente ON citas(patient_id);
+CREATE INDEX idx_paciente_documento ON pacientes(document_number);
 
+ALTER TABLE citas
+ADD CONSTRAINT unique_medico_fecha UNIQUE (doctor_id, scheduled_at);
+
+INSERT INTO roles (name, description) VALUES
+('Administrador','Acceso total'),
+('Recepcionista','Agenda y pacientes'),
+('Medico','Solo sus citas');
+
+INSERT INTO especialidades (name, description) VALUES
+('Medicina General','Atención primaria'),
+('Cardiologia','Especialista corazón'),
+('Pediatria','Especialista niños');
+
+INSERT INTO pacientes 
+(first_name, last_name, date_of_birth, gender, phone, email, document_number, address, insurance_number)
+VALUES
+('Juan', 'Perez', '1995-05-10', 'Masculino', '3001111111', 'juan@mail.com', '1001', 'Calle 10 #20-30', 'EPS001'),
+('Maria', 'Gomez', '1998-08-22', 'Femenino', '3002222222', 'maria@mail.com', '1002', 'Carrera 15 #40-50', 'EPS002');
+
+
+INSERT INTO especialidades (name, description)
+VALUES
+('Medicina General', 'Atención médica primaria'),
+('Pediatria', 'Atención médica infantil');
 
 
