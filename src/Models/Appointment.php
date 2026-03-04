@@ -62,5 +62,68 @@ class Appointment{
 
         return $stmt->fetchColumn();
     }
+    
+    public function compliance($start,$end){
 
+    $sql = "SELECT 
+        m.first_name || ' ' || m.last_name AS doctor,
+
+        COUNT(a.appointment_id) AS total_programadas,
+
+        SUM(CASE 
+            WHEN a.status='atendida' THEN 1 
+            ELSE 0 
+        END) AS total_atendidas,
+
+        SUM(CASE 
+            WHEN a.status='no_asiste' THEN 1 
+            ELSE 0 
+        END) AS total_no_asiste,
+
+        ROUND(
+            SUM(CASE WHEN a.status='atendida' THEN 1 ELSE 0 END)::decimal
+            / NULLIF(COUNT(a.appointment_id),0) * 100
+        ,2) AS cumplimiento
+
+        FROM citas a
+        JOIN medicos m ON a.doctor_id = m.doctor_id
+
+        WHERE a.scheduled_at BETWEEN :start AND :end
+
+        GROUP BY m.doctor_id";
+
+    $stmt = $this->conn->prepare($sql);
+
+    $stmt->execute([
+        'start'=>$start,
+        'end'=>$end
+    ]);
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+    public function myAppointments($doctor_id){
+
+    $sql="SELECT
+            a.appointment_id,
+            p.first_name || ' ' || p.last_name AS patient,
+            a.scheduled_at,
+            a.reason,
+            a.status
+          FROM citas a
+          JOIN pacientes p
+          ON a.patient_id=p.patient_id
+          JOIN medicos m
+          ON a.doctor_id=m.doctor_id
+          WHERE m.user_id=:doctor_id
+          ORDER BY a.scheduled_at";
+
+    $stmt=$this->conn->prepare($sql);
+
+    $stmt->execute([
+        'doctor_id'=>$doctor_id
+    ]);
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
 }

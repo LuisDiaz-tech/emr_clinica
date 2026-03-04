@@ -48,4 +48,11 @@ class AppointmentController{
         return $this->appointment->create($data);
     }
 
+    public function compliance($start,$end){
+    return $this->appointment->compliance($start,$end);
+    }
+
+    public function myAppointments($doctor_id){
+    return $this->appointment->myAppointments($doctor_id);
+}
 }
