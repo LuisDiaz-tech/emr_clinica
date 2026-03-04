@@ -92,11 +92,19 @@ CREATE TABLE login (
         FOREIGN KEY (user_id)
         REFERENCES usuarios(user_id)
         ON DELETE CASCADE
+
 );
 
-ALTER TABLE citas
+ALTER TABLE citas(
 ADD CONSTRAINT unique_medico_fecha
 UNIQUE (doctor_id,scheduled_at)
+);
 
+CREATE INDEX idx_citas_fecha ON citas(scheduled_at);
+CREATE INDEX idx_citas_medico ON citas(doctor_id);
+CREATE INDEX idx_citas_paciente ON citas(patient_id);
+CREATE INDEX idx_paciente_documento ON pacientes(document_number);
 
+ALTER TABLE citas
+ADD CONSTRAINT unique_medico_fecha UNIQUE (doctor_id, scheduled_at);
 
