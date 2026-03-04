@@ -5,7 +5,7 @@ namespace Felipe\EmrClinica\Models;
 class Doctor{
     private $conn;
 
-    public function __construct(PDO $db){
+    public function __construct($db){
         $this->conn = $db;
     } 
 
@@ -59,25 +59,37 @@ class Doctor{
         ]);
     }
 
-     public function update($id,$data)
-    {
-        $sql = "UPDATE pacientes SET first_name = :first_name,
-                                    last_name = :last_name,
-                                    phone = :phone,
-                                    email = :email
-                                    WHERE patient_id = :id";
+     public function update($id,$data){
 
-        $stmt = $this->conn->prepare($sql); 
-        
-        return $stmt->execute(
-            [
-                'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
-                'phone' => $data['phone'],
-                'email' => $data['email'],
-                'id' => $id
-            ]
-        );
+        $sql="UPDATE medicos SET
+            first_name=:first_name,
+            last_name=:last_name,
+            speciality_id=:speciality_id,
+            license_number=:license_number,
+            phone=:phone,
+            email=:email
+        WHERE doctor_id=:id";
+
+        $stmt=$this->conn->prepare($sql);
+
+        return $stmt->execute([
+            'first_name'=>$data['first_name'],
+            'last_name'=>$data['last_name'],
+            'speciality_id'=>$data['speciality_id'],
+            'license_number'=>$data['license_number'],
+            'phone'=>$data['phone'],
+            'email'=>$data['email'],
+            'id'=>$id
+        ]);
+    }
+
+    public function delete($id){
+
+        $sql="DELETE FROM medicos WHERE doctor_id=:id";
+
+        $stmt=$this->conn->prepare($sql);
+
+        return $stmt->execute(['id'=>$id]);
     }
 
 }
