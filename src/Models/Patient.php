@@ -79,4 +79,18 @@ class Patient{
             ]
         );
     }
+
+
+    public function getForSelect(){
+
+    $sql = "SELECT 
+                patient_id,
+                first_name || ' ' || last_name AS patient
+            FROM pacientes
+            ORDER BY first_name";
+
+    $stmt = $this->conn->query($sql);
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
 }

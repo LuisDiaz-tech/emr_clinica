@@ -20,6 +20,10 @@ if($role == 'Administrador'){
     echo '<a href="doctors.php">Gestion de Medicos</a><br>';
 }
 
+if($role == 'Administrador' || $role == 'Recepcionista'){
+    echo '<a href="appointments.php">Agenda de citas</a><br>';
+}
+
 if($role == 'Medico'){
     echo '<a href="my_appointments.php">Mis citas</a><br>';
 }

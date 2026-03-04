@@ -105,4 +105,17 @@ class Doctor{
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getForSelect(){
+
+    $sql = "SELECT 
+                doctor_id,
+                first_name || ' ' || last_name AS doctor
+            FROM medicos
+            ORDER BY first_name";
+
+    $stmt = $this->conn->query($sql);
+
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
 }

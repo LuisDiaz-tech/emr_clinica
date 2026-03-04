@@ -29,6 +29,38 @@ class Appointment{
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-   
+    public function create($data){
+
+        $sql = "INSERT INTO citas
+                (patient_id, doctor_id, scheduled_at, reason, created_by_user_id)
+                VALUES
+                (:patient_id, :doctor_id, :scheduled_at, :reason, :user_id)";
+
+        $stmt = $this->conn->prepare($sql);
+
+        return $stmt->execute([
+            'patient_id'=>$data['patient_id'],
+            'doctor_id'=>$data['doctor_id'],
+            'scheduled_at'=>$data['scheduled_at'],
+            'reason'=>$data['reason'],
+            'user_id'=>$data['user_id']
+        ]);
+    }
+
+    public function doctorBusy($doctor_id,$datetime){
+
+        $sql="SELECT COUNT(*) 
+              FROM citas
+              WHERE doctor_id = :doctor_id
+              AND scheduled_at = :datetime";
+
+        $stmt=$this->conn->prepare($sql);
+        $stmt->execute([
+            'doctor_id'=>$doctor_id,
+            'datetime'=>$datetime
+        ]);
+
+        return $stmt->fetchColumn();
+    }
 
 }
