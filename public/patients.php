@@ -10,7 +10,7 @@ $controller = new PatientController();
 $patients = [];
 
 if(isset($_GET['search']) && !empty($_GET['search'])){
-   $patients = $controller->search($_GET[search]);
+   $patients = $controller->search($_GET['search']);
 } else {
     $patients = $controller->index();    
 }
