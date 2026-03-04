@@ -15,6 +15,12 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
     $patients = $controller->index();    
 }
 
+if(isset($_GET['delete'])){
+    $controller->destroy((int) $_GET['delete']);
+    header("Location: patient.php");
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +45,7 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
             <th>Documento</th>
             <th>Teléfono</th>
             <th>Email</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -49,6 +56,8 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
                 <td><?= $patient['document_number'] ?></td>
                 <td><?= $patient['phone'] ?></td>
                 <td><?= $patient['email'] ?></td>
+                <td><a href="patients.php?delete=<?= $patient['patient_id']?>" 
+                            onclick="return confirm('Está seguro que quiere eliminar este paciente?')"></a> </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
