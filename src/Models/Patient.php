@@ -26,5 +26,15 @@ class Patient{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
+    public function search($term): array{
+        $sql = "SELECT * FROM pacientes
+        WHERE first_name ILIKE :term
+        OR last_name ILIKE :term 
+        OR document_number ILIKE :term
+        ORDER BY patient_id DESC";
+    $stmt = $this->conn->prepare($sql);
+    $stmt-> execute(['term' => "%term%"]);
+    
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

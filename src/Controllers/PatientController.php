@@ -21,5 +21,9 @@ private patient $patientModel;
 
     public function store(array $data): bool {
     return $this->patientModel->create($data);
-}
+    }
+
+    public function search(string $term): array{
+        return $this->patientModel->search($term);
+    }
 }

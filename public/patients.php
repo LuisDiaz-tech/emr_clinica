@@ -7,7 +7,14 @@ use Felipe\EmrClinica\Controllers\PatientController;
 session_start();
 
 $controller = new PatientController();
-$patients = $controller->index();
+$patients = [];
+
+if(isset($_GET['search']) && !empty($_GET['search'])){
+   $patients = $controller->search($_GET[search]);
+} else {
+    $patients = $controller->index();    
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -18,9 +25,12 @@ $patients = $controller->index();
 <body>
 
 <h1>Pacientes</h1>
-
-<a href="create_patient.php">Crear nuevo paciente</a>
-
+<a href="create_patient.php">Crear nuevo paciente</a><br></br>
+<form method="GET">
+    <input type="text" name="search" placeholder="Buscar por nombre o el numero de documento">
+    <button type="submit">Buscar</button>
+    <a href="patients.php">Limpiar</a> <br></br>
+</form>
 <table border="1" cellpadding="5">
     <thead>
         <tr>
