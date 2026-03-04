@@ -9,7 +9,7 @@ class Patient{
 
     public function __construct(PDO $db){
         $this->conn = $db;
-    }
+    } 
 
     public function create(array $data): bool{
         $sql = "INSERT INTO pacientes
@@ -19,7 +19,7 @@ class Patient{
 
         $stmt= $this->conn->prepare($sql);
         return $stmt->execute($data);
-    }
+    } 
 
     public function getAll(): array{
         $stmt = $this->conn->query("SELECT * FROM pacientes ORDER BY patient_id DESC");
@@ -67,7 +67,7 @@ class Patient{
                                     email = :email
                                     WHERE patient_id = :id";
 
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->conn->prepare($sql); 
         
         return $stmt->execute(
             [
