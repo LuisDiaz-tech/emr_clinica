@@ -77,7 +77,7 @@ CREATE TABLE citas(
         FOREIGN KEY (created_by_user_id)
         REFERENCES usuarios(user_id)
         ON DELETE SET NULL
-)
+);
 
 CREATE TABLE login (
     login_id SERIAL PRIMARY KEY,
@@ -92,8 +92,11 @@ CREATE TABLE login (
         FOREIGN KEY (user_id)
         REFERENCES usuarios(user_id)
         ON DELETE CASCADE
-)
+);
 
+ALTER TABLE citas
+ADD CONSTRAINT unique_medico_fecha
+UNIQUE (doctor_id,scheduled_at)
 
 
 

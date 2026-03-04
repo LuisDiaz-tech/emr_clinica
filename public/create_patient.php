@@ -6,8 +6,6 @@ use Felipe\EmrClinica\Controllers\PatientController;
 
 session_start();
 
-Auth::role(['Administrador','Recepcionista']);
-
 $controller = new PatientController();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
