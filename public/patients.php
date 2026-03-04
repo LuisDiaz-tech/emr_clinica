@@ -3,8 +3,9 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Felipe\EmrClinica\Controllers\PatientController;
+use Felipe\EmrClinica\Core\Auth;
 
-session_start();
+Auth::role(['Administrador','Recepcionista']);
 
 $controller = new PatientController();
 $patients = [];
@@ -63,6 +64,7 @@ if(isset($_GET['delete'])){
         <?php endforeach; ?>
     </tbody>
 </table>
-
+<br></br>
+<a href="dashboard.php">Volver al menú</a>
 </body>
 </html>

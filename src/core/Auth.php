@@ -1,6 +1,7 @@
 <?php
 
 namespace Felipe\EmrClinica\Core;
+session_start();
 
 Class Auth{
 

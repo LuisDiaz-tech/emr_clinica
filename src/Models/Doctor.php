@@ -18,7 +18,7 @@ class Doctor{
                        m.email,
                        e.name as speciality
                        FROM medicos m
-                       JOIN especialidades e ON m.speciality = e.speciality_id
+                       JOIN especialidades e ON m.specialty_id = e.specialty_id
                        ORDER BY m.doctor_id DESC";
         
         $stmt = $this->conn->query($sql);
