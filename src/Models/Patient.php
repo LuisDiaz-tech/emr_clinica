@@ -48,6 +48,16 @@ class Patient{
     $stmt = $this->conn->prepare("DELETE FROM pacientes WHERE patient_id = :id");
     return $stmt->execute(['id' => $id]);
     }
+    
+    public function getById($id)
+    {
+        $stmt = $this->conn->prepare(
+            "SELECT * FROM pacientes WHERE patient_id = :id"
+        );
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
 
     public function update($id,$data)
     {

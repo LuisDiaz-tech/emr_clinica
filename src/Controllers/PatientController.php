@@ -36,7 +36,7 @@ private patient $patientModel;
         return $this->patientModel->getById($id);
     }
 
-    public function update($id){
-        return $this->patientModel->update($id);
+    public function update($id,$data){
+        return $this->patientModel->update($id,$data);
     }
 }

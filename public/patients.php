@@ -56,8 +56,8 @@ if(isset($_GET['delete'])){
                 <td><?= $patient['document_number'] ?></td>
                 <td><?= $patient['phone'] ?></td>
                 <td><?= $patient['email'] ?></td>
-                <a href="edit_patient.php?id=<?= $patient['patient_id'] ?>">Editar</a>
-                <td><a href="patients.php?delete=<?= $patient['patient_id']?>" 
+                <td><a href="edit_patient.php?id=<?= $patient['patient_id'] ?>">Editar</a>
+                    <a href="patients.php?delete=<?= $patient['patient_id']?>" 
                             onclick="return confirm('Está seguro que quiere eliminar este paciente?')">Eliminar</a> </td>
             </tr>
         <?php endforeach; ?>
