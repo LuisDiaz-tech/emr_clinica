@@ -26,4 +26,17 @@ private patient $patientModel;
     public function search(string $term): array{
         return $this->patientModel->search($term);
     }
+
+    public function destroy($id)
+    {   
+    $this->patientModel->delete($id);
+    }
+
+    public function edit($id){
+        return $this->patientModel->getById($id);
+    }
+
+    public function update($id){
+        return $this->patientModel->update($id);
+    }
 }

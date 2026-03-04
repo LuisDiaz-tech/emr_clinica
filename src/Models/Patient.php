@@ -42,4 +42,31 @@ class Patient{
    
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function delete($id)
+    {
+    $stmt = $this->conn->prepare("DELETE FROM pacientes WHERE patient_id = :id");
+    return $stmt->execute(['id' => $id]);
+    }
+
+    public function update($id,$data)
+    {
+        $sql = "UPDATE pacientes SET first_name = :first_name,
+                                    last_name = :last_name,
+                                    phone = :phone,
+                                    email = :email
+                                    WHERE patient_id = :id";
+
+        $stmt = $this->conn->prepare($sql);
+        
+        return $stmt->execute(
+            [
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'phone' => $data['phone'],
+                'email' => $data['email'],
+                'id' => $id
+            ]
+        );
+    }
 }
