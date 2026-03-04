@@ -41,15 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form method="POST">
     <input type="text" name="first_name" placeholder="Nombre" required><br><br>
     <input type="text" name="last_name" placeholder="Apellido" required><br><br>
-    <input type="date" name="date_of_birth" required><br><br>
-    <select name="gender">
+    <label>Fecha de nacimiento: </label><input type="date" name="date_of_birth" required><br><br>
+    <label>Genero: </label><select name="gender">
         <option value="Masculino">Masculino</option>
         <option value="Femenino">Femenino</option>
     </select><br><br>
     <input type="text" name="phone" placeholder="Teléfono"><br><br>
     <input type="email" name="email" placeholder="Email"><br><br>
     <input type="text" name="document_number" placeholder="Documento" required><br><br>
-    <input type="text" name="address" placeholder="Dirección"><br><br>
+    <input type="text" name="address" placeholder="Cra 1"><br><br>
     <input type="text" name="insurance_number" placeholder="Seguro"><br><br>
 
     <button type="submit">Guardar</button>
